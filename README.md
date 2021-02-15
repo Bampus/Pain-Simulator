@@ -1,4 +1,4 @@
---To do list
---bakground
---enkel karaktär
---
+- To do list
+- bakground
+- enkel karaktär
+- 
