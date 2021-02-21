@@ -1,4 +1,4 @@
 - To do list
 - bakground
 - enkel karaktär
-- 
+- använd mus och dess x cordinat för att förlytta karatären
