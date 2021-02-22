@@ -1,4 +1,5 @@
 - To do list
-- bakground
+- platform
 - enkel karaktär
-- använd mus och dess x cordinat för att förlytta karatären
+- 
+- använd mus för x cordinat och mellanslag för att hoppa 
