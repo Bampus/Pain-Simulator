@@ -1,5 +1,1 @@
-- To do list
-- platform
-- enkel karaktär
-- 
-- använd mus för x cordinat och mellanslag för att hoppa 
+Hejsan svejsan detta är min början på min version av jump då Detta spel heter up och mitt uppdrag kommer vara att hoppa från plattform till plattform och sedan komma till slutet. Jag har hitils lyckats få en kub som kan röra sig från sida till sida men jag är snart klar med att kunna hoppa och efter det ska jag implementera kollision mellan kuben och plattformerna. 
