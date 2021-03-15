@@ -32,9 +32,9 @@ function love.draw()
    love.graphics.rectangle("fill", 100, 400, 80, 10)
    love.graphics.rectangle("fill", 350, 400, 80, 10)
    love.graphics.setColor(1,1,1,1)
-    for i = 0, love.graphics.getWidth() / background:getWidth() do
-     for j = 0, love.graphics.getHeight() / background:getHeight() do
-        love.graphics.draw(background, i * background:getWidth(), j * background:getHeight())
-    end
-  end
+    //for i = 0, love.graphics.getWidth() / background:getWidth() do
+   //  for j = 0, love.graphics.getHeight() / background:getHeight() do
+   //     love.graphics.draw(background, i * background:getWidth(), j * background:getHeight())
+    //end
+  //end
 end
