@@ -1,7 +1,11 @@
-retryCount = 0
-
 bump = require "bump"
 world = bump.newWorld()
+
+soundtrack = love.audio.newSource("sound/sad.mp3", "stream");
+soundtrack_2 = love.audio.newSource("sound/starting.mp3", "stream");
+soundtrack_3 = love.audio.newSource("sound/win.mp3", "stream");
+
+soundtrack_2:play()
 
 player = {
   x = 0,
@@ -188,10 +192,10 @@ player = {
     },
 
     ["block_plattForm_16"] = {
-      x = 250,
-      y = 540,
+      x = 115,
+      y = 452,
       width = 8,
-      height = 60
+      height = 20
     },
 
     ["block_plattForm_17"] = {
@@ -252,14 +256,14 @@ player = {
 
     ["block_plattForm_25"] = {
       x = 690,
-      y = 550,
+      y = 540,
       width = 8,
-      height = 8
+      height = 60
     },
 
     ["block_plattForm_26"] = {
-      x = 740,
-      y = 535,
+      x = 730,
+      y = 550,
       width = 8,
       height = 8
     },
@@ -288,6 +292,13 @@ player = {
     ["block_plattForm_30"] = {
       x = 750,
       y = 420,
+      width = 8,
+      height = 8
+    },
+
+    ["block_plattForm_31"] = {
+      x = 750,
+      y = 530,
       width = 8,
       height = 8
     },
@@ -1210,28 +1221,29 @@ function player.update(dt)
   player.applyGravity(dt)
   player.collide(dt)
   player.jump(dt)
+  player.win(dt)
+end
+
+function player.setPosition(x, y)
+  player.x, player.y = x, y
 end
 
 function love.keypressed(r)
-	if r == 'escape' then
+	if r == "escape" then
 		love.event.quit()
 	end
   if r == "r" then
     player.setPosition(2, 580)
-    retryCount = retryCount + 1
+  end
+  if r == "r" then
+    soundtrack:play()
   end
 end
-
-
 
 function player.jump(dt)
   if love.keyboard.isDown("w") and player.onGround == true then
     player.yVelocity = player.jumpVelocity
   end
-end
-
-function player.setPosition(x, y)
-  player.x, player.y = x, y
 end
 
 function player.move(dt)
@@ -1265,6 +1277,12 @@ function player.collide(dt)
   end
   player.x = nextX
   player.y = nextY
+end
+
+function player.win(dt)
+  if player.x > 785 and player.y < 100 then
+    soundtrack_3:play()
+  end
 end
 
 function player.draw()
@@ -1378,7 +1396,8 @@ function love.draw()
   love.graphics.rectangle("fill", blocks.block_plattForm_28.x, blocks.block_plattForm_28.y, blocks.block_plattForm_28.width, blocks.block_plattForm_28.height)
   love.graphics.rectangle("fill", blocks.block_plattForm_29.x, blocks.block_plattForm_29.y, blocks.block_plattForm_29.width, blocks.block_plattForm_29.height)
   love.graphics.rectangle("fill", blocks.block_plattForm_30.x, blocks.block_plattForm_30.y, blocks.block_plattForm_30.width, blocks.block_plattForm_30.height)
-  
+  love.graphics.rectangle("fill", blocks.block_plattForm_31.x, blocks.block_plattForm_31.y, blocks.block_plattForm_31.width, blocks.block_plattForm_31.height)
+
   love.graphics.rectangle("fill", blocks_2.block_plattForm_1.x, blocks_2.block_plattForm_1.y, blocks_2.block_plattForm_1.width, blocks_2.block_plattForm_1.height)
   love.graphics.rectangle("fill", blocks_2.block_plattForm_2.x, blocks_2.block_plattForm_2.y, blocks_2.block_plattForm_2.width, blocks_2.block_plattForm_2.height)
   love.graphics.rectangle("fill", blocks_2.block_plattForm_3.x, blocks_2.block_plattForm_3.y, blocks_2.block_plattForm_3.width, blocks_2.block_plattForm_3.height)
@@ -1475,6 +1494,7 @@ function love.load()
   world:add(blocks.block_plattForm_28, blocks.block_plattForm_28.x, blocks.block_plattForm_28.y, blocks.block_plattForm_28.width, blocks.block_plattForm_28.height)
   world:add(blocks.block_plattForm_29, blocks.block_plattForm_29.x, blocks.block_plattForm_29.y, blocks.block_plattForm_29.width, blocks.block_plattForm_29.height)
   world:add(blocks.block_plattForm_30, blocks.block_plattForm_30.x, blocks.block_plattForm_30.y, blocks.block_plattForm_30.width, blocks.block_plattForm_30.height)
+  world:add(blocks.block_plattForm_31, blocks.block_plattForm_31.x, blocks.block_plattForm_31.y, blocks.block_plattForm_31.width, blocks.block_plattForm_31.height)
 
   world:add(blocks_2.block_plattForm_1, blocks_2.block_plattForm_1.x, blocks_2.block_plattForm_1.y, blocks_2.block_plattForm_1.width, blocks_2.block_plattForm_1.height)
   world:add(blocks_2.block_plattForm_2, blocks_2.block_plattForm_2.x, blocks_2.block_plattForm_2.y, blocks_2.block_plattForm_2.width, blocks_2.block_plattForm_2.height)
