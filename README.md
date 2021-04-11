@@ -1,1 +1,7 @@
-Hejsan svejsan detta är min början på min version av jump då Detta spel heter up och mitt uppdrag kommer vara att hoppa från plattform till plattform och sedan komma till slutet. Jag har hitils lyckats få en kub som kan röra sig från sida till sida men jag är snart klar med att kunna hoppa och efter det ska jag implementera kollision mellan kuben och plattformerna. 
+Hej detta är mitt spel Pain Simulator 
+Jämfört med titeln av spelet så kommer ingen fysisk smärta åstakomma i direkt handlig av spelet men det kan hända olyckor p.g.a humör som har åstakommit från Pain Simulator.
+
+Klicka esc för att stänga av spelet och r för att starta om från närmaste startpunkt
+
+*obs tips från skaparen* 
+Ha inte för mycket tillit på det du står på och var nyfiken då detta kan resultera i minskad huvudverk för dagen.

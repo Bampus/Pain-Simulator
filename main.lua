@@ -1264,14 +1264,11 @@ function player.move(dt)
 end
 
 function player.applyGravity(dt)
-  if player.onGround == true then
-    player.yVelocity = 0
   if player.yVelocity < player.terminalVelocity then
   player.yVelocity = player.yVelocity + player.gravity * dt
   else
     player.yVelocity = player.terminalVelocity
   end
-end
 end
 
 function player.collide(dt)
@@ -1467,7 +1464,7 @@ function love.draw()
 end
 
 function love.load()
-  player.setPosition(2, 580)
+  player.setPosition(290, 100)
   world:add(player, player.x, player.y, player.width, player.height)
 
   world:add(blocks.block_Baseplate, blocks.block_Baseplate.x, blocks.block_Baseplate.y, blocks.block_Baseplate.width, blocks.block_Baseplate.height)
