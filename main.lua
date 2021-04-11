@@ -46,8 +46,15 @@ player = {
     ["block_plattForm_divider"] = {
       x = 16,
       y = 420,
-      width = 502,
+      width = 164,
       height = 8
+    },
+
+    ["block_plattForm_divider_2"] = {
+      x = 180,
+      y = 60,
+      width = 8,
+      height = 380
     },
 
     ["block_plattForm_secret_1"] = {
@@ -1257,11 +1264,14 @@ function player.move(dt)
 end
 
 function player.applyGravity(dt)
+  if player.onGround == true then
+    player.yVelocity = 0
   if player.yVelocity < player.terminalVelocity then
   player.yVelocity = player.yVelocity + player.gravity * dt
   else
     player.yVelocity = player.terminalVelocity
   end
+end
 end
 
 function player.collide(dt)
@@ -1463,7 +1473,7 @@ function love.load()
   world:add(blocks.block_Baseplate, blocks.block_Baseplate.x, blocks.block_Baseplate.y, blocks.block_Baseplate.width, blocks.block_Baseplate.height)
   world:add(blocks.block_borderWallLeft, blocks.block_borderWallLeft.x, blocks.block_borderWallLeft.y, blocks.block_borderWallLeft.width, blocks.block_borderWallLeft.height)
   world:add(blocks.block_borderWallRight, blocks.block_borderWallRight.x, blocks.block_borderWallRight.y, blocks.block_borderWallRight.width, blocks.block_borderWallRight.height)
-    world:add(blocks.block_plattForm_secret_3, blocks.block_plattForm_secret_3.x, blocks.block_plattForm_secret_3.y, blocks.block_plattForm_secret_3.width, blocks.block_plattForm_secret_3.height)
+  world:add(blocks.block_plattForm_secret_3, blocks.block_plattForm_secret_3.x, blocks.block_plattForm_secret_3.y, blocks.block_plattForm_secret_3.width, blocks.block_plattForm_secret_3.height)
 
   world:add(blocks.block_plattForm_2, blocks.block_plattForm_2.x, blocks.block_plattForm_2.y, blocks.block_plattForm_2.width, blocks.block_plattForm_2.height)
   world:add(blocks.block_plattForm_4, blocks.block_plattForm_4.x, blocks.block_plattForm_4.y, blocks.block_plattForm_4.width, blocks.block_plattForm_4.height)
@@ -1567,6 +1577,7 @@ function love.load()
   world:add(blocks_5.block_plattForm_14, blocks_5.block_plattForm_14.x, blocks_5.block_plattForm_14.y, blocks_5.block_plattForm_14.width, blocks_5.block_plattForm_14.height)
 
   world:add(blocks.block_plattForm_divider, blocks.block_plattForm_divider.x, blocks.block_plattForm_divider.y, blocks.block_plattForm_divider.width, blocks.block_plattForm_divider.height)
+  world:add(blocks.block_plattForm_divider_2, blocks.block_plattForm_divider_2.x, blocks.block_plattForm_divider_2.y, blocks.block_plattForm_divider_2.width, blocks.block_plattForm_divider_2.height)
 end
 
 
