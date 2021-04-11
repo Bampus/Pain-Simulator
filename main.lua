@@ -1,3 +1,5 @@
+retryCount = 0
+
 bump = require "bump"
 world = bump.newWorld()
 
@@ -53,7 +55,7 @@ player = {
 
     ["block_plattForm_secret_2"] = {
       x = 0,
-      y = 42,
+      y = 420,
       width = 30,
       height = 23
     },
@@ -65,18 +67,26 @@ player = {
       height = 1
     },
 
+    ["block_plattForm_secret_4"] = {
+      x = 725,
+      y = 100,
+      width = 32,
+      height = 8
+    },
+
+    ["block_plattForm_secret_5"] = {
+      x = 510,
+      y = 210,
+      width = 8,
+      height = 10
+    },
+
+
     ["block_plattFrom_trap_1"] = {
       x = 545,
       y = 540,
       width = 40 ,
       height = 8
-    },
-
-    ["block_plattForm_1"] = {
-      x = 20,
-      y = 560,
-      width = 8,
-      height = 40 
     },
 
     ["block_plattForm_2"] = {
@@ -1171,69 +1181,26 @@ player = {
     },
 
     ["block_plattForm_12"] = {
-      x = 20,
+      x = 2,
       y = 90,
       width = 2,
       height = 2
     },
 
     ["block_plattForm_13"] = {
-      x = 2,
+      x = 20,
       y = 60,
       width = 2,
       height = 2
     },
 
     ["block_plattForm_14"] = {
-      x = 250,
-      y = 125,
-      width = 8,
-      height = 8
-    },
-
-    ["block_plattForm_15"] = {
-      x = 290,
-      y = 100,
-      width = 8,
-      height = 8
-    },
-
-    ["block_plattForm_16"] = {
-      x = 330,
-      y = 125,
-      width = 8,
-      height = 8
-    },
-
-    ["block_plattForm_17"] = {
-      x = 370,
-      y = 175,
-      width = 8,
-      height = 8
-    },
-
-    ["block_plattForm_18"] = {
-      x = 410,
-      y = 150,
-      width = 8,
-      height = 8
-    },
-
-    ["block_plattForm_19"] = {
-      x = 450,
-      y = 150,
-      width = 8,
-      height = 8
-    },
-
-    ["block_plattForm_20"] = {
-      x = 410,
-      y = 125,
-      width = 8,
+      x = 22,
+      y = 50,
+      width = 750,
       height = 8
     },
   }
-
 function love.update(dt)
   player.update(dt)
 end
@@ -1244,6 +1211,18 @@ function player.update(dt)
   player.collide(dt)
   player.jump(dt)
 end
+
+function love.keypressed(r)
+	if r == 'escape' then
+		love.event.quit()
+	end
+  if r == "r" then
+    player.setPosition(2, 580)
+    retryCount = retryCount + 1
+  end
+end
+
+
 
 function player.jump(dt)
   if love.keyboard.isDown("w") and player.onGround == true then
@@ -1301,6 +1280,8 @@ function love.draw()
   love.graphics.rectangle("fill", blocks.block_plattForm_secret_1.x, blocks.block_plattForm_secret_1.y, blocks.block_plattForm_secret_1.width, blocks.block_plattForm_secret_1.height)
   love.graphics.rectangle("fill", blocks.block_plattForm_secret_2.x, blocks.block_plattForm_secret_2.y, blocks.block_plattForm_secret_2.width, blocks.block_plattForm_secret_2.height)
   love.graphics.rectangle("fill", blocks.block_plattForm_secret_3.x, blocks.block_plattForm_secret_3.y, blocks.block_plattForm_secret_3.width, blocks.block_plattForm_secret_3.height)
+  love.graphics.rectangle("fill", blocks.block_plattForm_secret_4.x, blocks.block_plattForm_secret_4.y, blocks.block_plattForm_secret_4.width, blocks.block_plattForm_secret_4.height)
+  love.graphics.rectangle("fill", blocks.block_plattForm_secret_5.x, blocks.block_plattForm_secret_5.y, blocks.block_plattForm_secret_5.width, blocks.block_plattForm_secret_5.height)
 
   love.graphics.rectangle("fill", blocks_2.block_plattForm_secret_1.x, blocks_2.block_plattForm_secret_1.y, blocks_2.block_plattForm_secret_1.width, blocks_2.block_plattForm_secret_1.height)
   love.graphics.rectangle("fill", blocks_2.block_plattForm_secret_2.x, blocks_2.block_plattForm_secret_2.y, blocks_2.block_plattForm_secret_2.width, blocks_2.block_plattForm_secret_2.height)
@@ -1368,7 +1349,6 @@ function love.draw()
   love.graphics.rectangle("fill", blocks_4.block_plattFrom_trap_59.x, blocks_4.block_plattFrom_trap_59.y, blocks_4.block_plattFrom_trap_59.width, blocks_4.block_plattFrom_trap_59.height)
   love.graphics.rectangle("fill", blocks_4.block_plattFrom_trap_60.x, blocks_4.block_plattFrom_trap_60.y, blocks_4.block_plattFrom_trap_60.width, blocks_4.block_plattFrom_trap_60.height)
 
-  love.graphics.rectangle("fill", blocks.block_plattForm_1.x, blocks.block_plattForm_1.y, blocks.block_plattForm_1.width, blocks.block_plattForm_1.height)
   love.graphics.rectangle("fill", blocks.block_plattForm_2.x, blocks.block_plattForm_2.y, blocks.block_plattForm_2.width, blocks.block_plattForm_2.height)
   love.graphics.rectangle("fill", blocks.block_plattForm_4.x, blocks.block_plattForm_4.y, blocks.block_plattForm_4.width, blocks.block_plattForm_4.height)
   love.graphics.rectangle("fill", blocks.block_plattForm_5.x, blocks.block_plattForm_5.y, blocks.block_plattForm_5.width, blocks.block_plattForm_5.height)
@@ -1454,40 +1434,18 @@ function love.draw()
   love.graphics.rectangle("fill", blocks_4.block_plattForm_20.x, blocks_4.block_plattForm_20.y, blocks_4.block_plattForm_20.width, blocks_4.block_plattForm_20.height)
   love.graphics.rectangle("fill", blocks_4.block_plattForm_21.x, blocks_4.block_plattForm_21.y, blocks_4.block_plattForm_21.width, blocks_4.block_plattForm_21.height)
 
-  love.graphics.rectangle("fill", blocks_5.block_plattForm_1.x, blocks_5.block_plattForm_1.y, blocks_5.block_plattForm_1.width, blocks_5.block_plattForm_1.height)
-  love.graphics.rectangle("fill", blocks_5.block_plattForm_3.x, blocks_5.block_plattForm_3.y, blocks_5.block_plattForm_3.width, blocks_5.block_plattForm_3.height)
-  love.graphics.rectangle("fill", blocks_5.block_plattForm_4.x, blocks_5.block_plattForm_4.y, blocks_5.block_plattForm_4.width, blocks_5.block_plattForm_4.height)
-  love.graphics.rectangle("fill", blocks_5.block_plattForm_5.x, blocks_5.block_plattForm_5.y, blocks_5.block_plattForm_5.width, blocks_5.block_plattForm_5.height)
-  love.graphics.rectangle("fill", blocks_5.block_plattForm_6.x, blocks_5.block_plattForm_6.y, blocks_5.block_plattForm_6.width, blocks_5.block_plattForm_6.height)
-  love.graphics.rectangle("fill", blocks_5.block_plattForm_7.x, blocks_5.block_plattForm_7.y, blocks_5.block_plattForm_7.width, blocks_5.block_plattForm_7.height)
-  love.graphics.rectangle("fill", blocks_5.block_plattForm_8.x, blocks_5.block_plattForm_8.y, blocks_5.block_plattForm_8.width, blocks_5.block_plattForm_8.height)
-  love.graphics.rectangle("fill", blocks_5.block_plattForm_9.x, blocks_5.block_plattForm_9.y, blocks_5.block_plattForm_9.width, blocks_5.block_plattForm_9.height)
-  love.graphics.rectangle("fill", blocks_5.block_plattForm_10.x, blocks_5.block_plattForm_10.y, blocks_5.block_plattForm_10.width, blocks_5.block_plattForm_10.height)
-  love.graphics.rectangle("fill", blocks_4.block_plattForm_11.x, blocks_4.block_plattForm_11.y, blocks_4.block_plattForm_11.width, blocks_4.block_plattForm_11.height)
-  love.graphics.rectangle("fill", blocks_4.block_plattForm_12.x, blocks_4.block_plattForm_12.y, blocks_4.block_plattForm_12.width, blocks_4.block_plattForm_12.height)
-  love.graphics.rectangle("fill", blocks_4.block_plattForm_13.x, blocks_4.block_plattForm_13.y, blocks_4.block_plattForm_13.width, blocks_4.block_plattForm_13.height)
-  love.graphics.rectangle("fill", blocks_4.block_plattForm_14.x, blocks_4.block_plattForm_14.y, blocks_4.block_plattForm_14.width, blocks_4.block_plattForm_14.height)
-  love.graphics.rectangle("fill", blocks_4.block_plattForm_15.x, blocks_4.block_plattForm_15.y, blocks_4.block_plattForm_15.width, blocks_4.block_plattForm_15.height)
-  love.graphics.rectangle("fill", blocks_4.block_plattForm_16.x, blocks_4.block_plattForm_16.y, blocks_4.block_plattForm_16.width, blocks_4.block_plattForm_16.height)
-  love.graphics.rectangle("fill", blocks_4.block_plattForm_17.x, blocks_4.block_plattForm_17.y, blocks_4.block_plattForm_17.width, blocks_4.block_plattForm_17.height)
-  love.graphics.rectangle("fill", blocks_4.block_plattForm_18.x, blocks_4.block_plattForm_18.y, blocks_4.block_plattForm_18.width, blocks_4.block_plattForm_18.height)
-  love.graphics.rectangle("fill", blocks_4.block_plattForm_19.x, blocks_4.block_plattForm_19.y, blocks_4.block_plattForm_19.width, blocks_4.block_plattForm_19.height)
-  love.graphics.rectangle("fill", blocks_4.block_plattForm_20.x, blocks_4.block_plattForm_20.y, blocks_4.block_plattForm_20.width, blocks_4.block_plattForm_20.height)
-
   love.graphics.rectangle("fill", blocks.block_plattForm_divider.x, blocks.block_plattForm_divider.y, blocks.block_plattForm_divider.width, blocks.block_plattForm_divider.height)
 end
 
 function love.load()
-  player.setPosition(20, 100)
+  player.setPosition(2, 580)
   world:add(player, player.x, player.y, player.width, player.height)
-  
+
   world:add(blocks.block_Baseplate, blocks.block_Baseplate.x, blocks.block_Baseplate.y, blocks.block_Baseplate.width, blocks.block_Baseplate.height)
   world:add(blocks.block_borderWallLeft, blocks.block_borderWallLeft.x, blocks.block_borderWallLeft.y, blocks.block_borderWallLeft.width, blocks.block_borderWallLeft.height)
   world:add(blocks.block_borderWallRight, blocks.block_borderWallRight.x, blocks.block_borderWallRight.y, blocks.block_borderWallRight.width, blocks.block_borderWallRight.height)
-  
-  world:add(blocks.block_plattForm_secret_3, blocks.block_plattForm_secret_3.x, blocks.block_plattForm_secret_3.y, blocks.block_plattForm_secret_3.width, blocks.block_plattForm_secret_3.height)
+    world:add(blocks.block_plattForm_secret_3, blocks.block_plattForm_secret_3.x, blocks.block_plattForm_secret_3.y, blocks.block_plattForm_secret_3.width, blocks.block_plattForm_secret_3.height)
 
-  world:add(blocks.block_plattForm_1, blocks.block_plattForm_1.x, blocks.block_plattForm_1.y, blocks.block_plattForm_1.width, blocks.block_plattForm_1.height)
   world:add(blocks.block_plattForm_2, blocks.block_plattForm_2.x, blocks.block_plattForm_2.y, blocks.block_plattForm_2.width, blocks.block_plattForm_2.height)
   world:add(blocks.block_plattForm_4, blocks.block_plattForm_4.x, blocks.block_plattForm_4.y, blocks.block_plattForm_4.width, blocks.block_plattForm_4.height)
   world:add(blocks.block_plattForm_5, blocks.block_plattForm_5.x, blocks.block_plattForm_5.y, blocks.block_plattForm_5.width, blocks.block_plattForm_5.height)
@@ -1517,7 +1475,7 @@ function love.load()
   world:add(blocks.block_plattForm_28, blocks.block_plattForm_28.x, blocks.block_plattForm_28.y, blocks.block_plattForm_28.width, blocks.block_plattForm_28.height)
   world:add(blocks.block_plattForm_29, blocks.block_plattForm_29.x, blocks.block_plattForm_29.y, blocks.block_plattForm_29.width, blocks.block_plattForm_29.height)
   world:add(blocks.block_plattForm_30, blocks.block_plattForm_30.x, blocks.block_plattForm_30.y, blocks.block_plattForm_30.width, blocks.block_plattForm_30.height)
-  
+
   world:add(blocks_2.block_plattForm_1, blocks_2.block_plattForm_1.x, blocks_2.block_plattForm_1.y, blocks_2.block_plattForm_1.width, blocks_2.block_plattForm_1.height)
   world:add(blocks_2.block_plattForm_2, blocks_2.block_plattForm_2.x, blocks_2.block_plattForm_2.y, blocks_2.block_plattForm_2.width, blocks_2.block_plattForm_2.height)
   world:add(blocks_2.block_plattForm_3, blocks_2.block_plattForm_3.x, blocks_2.block_plattForm_3.y, blocks_2.block_plattForm_3.width, blocks_2.block_plattForm_3.height)
@@ -1587,13 +1545,8 @@ function love.load()
   world:add(blocks_5.block_plattForm_12, blocks_5.block_plattForm_12.x, blocks_5.block_plattForm_12.y, blocks_5.block_plattForm_12.width, blocks_5.block_plattForm_12.height)
   world:add(blocks_5.block_plattForm_13, blocks_5.block_plattForm_13.x, blocks_5.block_plattForm_13.y, blocks_5.block_plattForm_13.width, blocks_5.block_plattForm_13.height)
   world:add(blocks_5.block_plattForm_14, blocks_5.block_plattForm_14.x, blocks_5.block_plattForm_14.y, blocks_5.block_plattForm_14.width, blocks_5.block_plattForm_14.height)
-  world:add(blocks_5.block_plattForm_15, blocks_5.block_plattForm_15.x, blocks_5.block_plattForm_15.y, blocks_5.block_plattForm_15.width, blocks_5.block_plattForm_15.height)
-  world:add(blocks_5.block_plattForm_16, blocks_5.block_plattForm_16.x, blocks_5.block_plattForm_16.y, blocks_5.block_plattForm_16.width, blocks_5.block_plattForm_16.height)
-  world:add(blocks_5.block_plattForm_17, blocks_5.block_plattForm_17.x, blocks_5.block_plattForm_17.y, blocks_5.block_plattForm_17.width, blocks_5.block_plattForm_17.height)
-  world:add(blocks_5.block_plattForm_18, blocks_5.block_plattForm_18.x, blocks_5.block_plattForm_18.y, blocks_5.block_plattForm_18.width, blocks_5.block_plattForm_18.height)
-  world:add(blocks_5.block_plattForm_19, blocks_5.block_plattForm_19.x, blocks_5.block_plattForm_19.y, blocks_5.block_plattForm_19.width, blocks_5.block_plattForm_19.height)
-  world:add(blocks_5.block_plattForm_20, blocks_5.block_plattForm_20.x, blocks_5.block_plattForm_20.y, blocks_5.block_plattForm_20.width, blocks_5.block_plattForm_20.height)
 
   world:add(blocks.block_plattForm_divider, blocks.block_plattForm_divider.x, blocks.block_plattForm_divider.y, blocks.block_plattForm_divider.width, blocks.block_plattForm_divider.height)
 end
+
 
