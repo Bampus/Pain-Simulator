@@ -1,11 +1,9 @@
 bump = require "bump"
 world = bump.newWorld()
-
-soundtrack = love.audio.newSource("sound/sad.mp3", "stream");
-soundtrack_2 = love.audio.newSource("sound/starting.mp3", "stream");
-soundtrack_3 = love.audio.newSource("sound/win.mp3", "stream");
-
-soundtrack_2:play()
+screen = 3
+soundtrack = love.audio.newSource("assets/sound/sad.mp3", "stream");
+soundtrack_2 = love.audio.newSource("assets/sound/starting.mp3", "stream");
+soundtrack_3 = love.audio.newSource("assets/sound/win.mp3", "stream");
 
 player = {
   x = 0,
@@ -1219,6 +1217,9 @@ player = {
       height = 8
     },
   }
+
+  soundtrack_2:play()
+
 function love.update(dt)
   player.update(dt)
 end
@@ -1244,6 +1245,15 @@ function love.keypressed(r)
   end
   if r == "r" then
     soundtrack:play()
+  end
+  if r == "t" then
+    screen = 2
+  end
+  if r == "s" then
+    screen = 0
+  end
+  if r == "m" then
+    screen = 3
   end
 end
 
@@ -1280,6 +1290,9 @@ function player.collide(dt)
     local col = cols[i]
     if col.normal.y == -1 then
       player.onGround = true
+      if player.yVelocity > 0.0 then 
+        player.yVelocity = 0.0
+      end
     end
   end
   player.x = nextX
@@ -1289,7 +1302,53 @@ end
 function player.win(dt)
   if player.x > 785 and player.y < 100 then
     soundtrack_3:play()
+    screen = 1
   end
+end
+
+function drawEndScreen()
+  local endScreen = love.graphics.newImage("assets/pictures/endScreen.png")
+  love.graphics.draw(
+    endScreen,
+    love.graphics.newQuad(0, 0, endScreen:getWidth(), endScreen:getHeight(), endScreen:getWidth(),endScreen:getHeight()),
+    0,
+    0,
+    0,
+    1,
+    1,
+    0,
+    0
+  )
+end
+
+function drawStartScreen()
+  local startScreen = love.graphics.newImage("assets/pictures/startScreen.png")
+  love.graphics.draw(
+   startScreen,
+    love.graphics.newQuad(0, 0, startScreen:getWidth(), startScreen:getHeight(), startScreen:getWidth(),startScreen:getHeight()),
+    0,
+    0,
+    0,
+    1,
+    1,
+    0,
+    0
+  )
+end
+
+function drawTutorialScreen()
+  local tutorialScreen = love.graphics.newImage("assets/pictures/tutorialScreen.png")
+  love.graphics.draw(
+    tutorialScreen,
+    love.graphics.newQuad(0, 0, tutorialScreen:getWidth(), tutorialScreen:getHeight(), tutorialScreen:getWidth(),tutorialScreen:getHeight()),
+    0,
+    0,
+    0,
+    1,
+    1,
+    0,
+    0
+  )
 end
 
 function player.draw()
@@ -1299,6 +1358,7 @@ end
 
 function love.draw()
   player.draw()
+
   love.graphics.setColor(1, 1, 1)
   love.graphics.rectangle("fill", blocks.block_Baseplate.x, blocks.block_Baseplate.y, blocks.block_Baseplate.width, blocks.block_Baseplate.height)
 
@@ -1461,10 +1521,23 @@ function love.draw()
   love.graphics.rectangle("fill", blocks_4.block_plattForm_21.x, blocks_4.block_plattForm_21.y, blocks_4.block_plattForm_21.width, blocks_4.block_plattForm_21.height)
 
   love.graphics.rectangle("fill", blocks.block_plattForm_divider.x, blocks.block_plattForm_divider.y, blocks.block_plattForm_divider.width, blocks.block_plattForm_divider.height)
+
+  if screen == 1 then
+    drawEndScreen()
+  end
+
+  if screen == 2 then
+    drawTutorialScreen()
+  end
+
+  if screen == 3 then
+    drawStartScreen()
+  end
+
 end
 
 function love.load()
-  player.setPosition(290, 100)
+  player.setPosition(2, 580)
   world:add(player, player.x, player.y, player.width, player.height)
 
   world:add(blocks.block_Baseplate, blocks.block_Baseplate.x, blocks.block_Baseplate.y, blocks.block_Baseplate.width, blocks.block_Baseplate.height)
@@ -1576,5 +1649,3 @@ function love.load()
   world:add(blocks.block_plattForm_divider, blocks.block_plattForm_divider.x, blocks.block_plattForm_divider.y, blocks.block_plattForm_divider.width, blocks.block_plattForm_divider.height)
   world:add(blocks.block_plattForm_divider_2, blocks.block_plattForm_divider_2.x, blocks.block_plattForm_divider_2.y, blocks.block_plattForm_divider_2.width, blocks.block_plattForm_divider_2.height)
 end
-
-
